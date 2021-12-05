@@ -3,6 +3,10 @@
 #include "game.h"
 
 int gridX, gridY;
+//variables to keep track of snake position
+int posX = 20, posY = 20;
+//variable to store current direction the snake is moving
+short sDirection = RIGHT;
 //function to initialize grid
 void initGrid (int x, int y){
     gridX = x;
@@ -41,4 +45,14 @@ void unit(int x , int y){
         glVertex2f(x, y+1);
     glEnd();
 }
-
+void drawSnake(){
+    if (sDirection == UP)
+        posY++;
+    else if(sDirection== DOWN)
+        posY--;
+    else if (sDirection== RIGHT)
+        posX++;
+    else if (sDirection== LEFT)
+        posX--;
+    glRectd(posX, posY, posX+1, posY+1);
+}
