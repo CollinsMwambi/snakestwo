@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include "game.h"
 
+
 #define COLUMNS 40
 #define ROWS 40
 //how many frames the snake moves per second
@@ -9,6 +10,10 @@
 
 //point to variable that stores snake direction in game.cpp
 extern short sDirection;
+//boolean expression to end game
+bool gameOver = false;
+//message box
+
 void display_callback();
 void reshape_callback(int, int );
 void timer_callback(int);
@@ -44,15 +49,16 @@ void display_callback()
     glClear(GL_COLOR_BUFFER_BIT);
     drawGrid();
     drawSnake();
-
-
-    //TESTING
-//    glRectd(index, 20, index+2, 22);
-//    index++;
-//    if (index > 40){
-//        index = 0;
-//    }
+    drawFood();
     glutSwapBuffers();
+    //should show message box but idk how to do that on linux yet
+    if (gameOver){
+
+
+    }
+
+
+
 }
 //used to set viewport
 void reshape_callback(int w, int h){
