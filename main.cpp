@@ -1,7 +1,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "game.h"
-#include <cstdlib>
+#include <stdlib.h>
 #include <string>
 #include <cstring>
 
@@ -61,12 +61,9 @@ void display_callback()
 
         char _score[10];
         itoa(score, _score,10);
-        char text[50] = "Your score: ";
+        char text[50] = "Your score is: ";
         strcat(text, _score);
-        //std::string s = std::to_string(score);
-
-        //uncomment on window s  if found  commented
-        MessageBox(NULL, text, "GAME OVER", 0);
+        MessageBox(NULL, text, "GAME OVER");
         exit(0);
 
     }
