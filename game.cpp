@@ -3,15 +3,21 @@
 #include <ctime>
 #include "game.h"
 
+//#define COLUMNS 40
+//#define ROWS 40
+//#define FPS 10
+
 
 int gridX, gridY;
 //variables to keep track of snake position
-int posX = 20, posY = 20;
+int posX [60] = {20,20,20,20, 20}, posY[60]= {20,19,18,16,16}; //arrays for position of the snake
+int snake_length = 5;
 //variable to store current direction the snake is moving
 short sDirection = RIGHT;
 bool food = true;
 int foodX, foodY;
 extern bool gameOver;
+extern int score;
 //function to initialize grid
 void initGrid (int x, int y){
     gridX = x;
@@ -57,7 +63,7 @@ void drawFood(){
         random(foodX, foodY);
     food = false;
     glRectf(foodX, foodY, foodX+1, foodY+1);
-    glColor3f(0.0, 1.0, 0.0); //color of food = green
+    glColor3f(0.0, 0.5, 0.5); //color of food = green
 }
 void random(int &x, int &y){
     int _maxX = gridX-2;
@@ -70,21 +76,41 @@ void random(int &x, int &y){
 
 
 void drawSnake(){
+
+    for (int i = snake_length-1; i>0; i--){
+        posX[i]= posX[i-1];
+        posY[i] = posY[i-1];
+    }
     if (sDirection == UP)
-        posY++;
+        posY[0]++;
     else if(sDirection== DOWN)
-        posY--;
+        posY[0]--;
     else if (sDirection== RIGHT)
-        posX++;
+        posX[0]++;
     else if (sDirection== LEFT)
-        posX--;
-    //color of snake = blue
-    glColor3f(0.0, 0.0, 1.0);
-    glRectd(posX, posY, posX+1, posY+1);
-    if (posX = 0 || posX == gridX-1 || posY == 0 || posY == gridY-1)
+        posX[0]--;
+    for (int i =0; i < snake_length; i++){
+        if (i == 0)
+            glColor3f(0.0, 0.0, 1.0); //color of snake = blue
+        else
+            glColor3f(1.0, 0.0, 0.0);
+        glRectd(posX[i], posY[i], posX[i]+1, posY[i]+1);
+    }
+
+
+    if (posX[0] == 0 || posX[0] == gridX-1 || posY[0] == 0 || posY[0] == gridY-1)
         gameOver = true;
-    if(posX == foodX && posY =foodY)
+    if(posX[0] == foodX && posY[0] == foodY){
+
+
+        score++;
+        snake_length++;
+        if (snake_length> MAX)
+            snake_length = MAX;
         food = true;
+
+    }
+
 
 
 

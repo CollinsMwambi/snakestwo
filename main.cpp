@@ -1,17 +1,22 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "game.h"
+#include <cstdlib>
+#include <string>
+#include <cstring>
 
 
 #define COLUMNS 40
 #define ROWS 40
 //how many frames the snake moves per second
 #define FPS 10
+#define MessageBox // remove if it shows errors
 
 //point to variable that stores snake direction in game.cpp
 extern short sDirection;
 //boolean expression to end game
 bool gameOver = false;
+int score = 0;
 //message box
 
 void display_callback();
@@ -54,6 +59,15 @@ void display_callback()
     //should show message box but idk how to do that on linux yet
     if (gameOver){
 
+        char _score[10];
+        itoa(score, _score,10);
+        char text[50] = "Your score: ";
+        strcat(text, _score);
+        //std::string s = std::to_string(score);
+
+        //uncomment on window s  if found  commented
+        MessageBox(NULL, text, "GAME OVER", 0);
+        exit(0);
 
     }
 
