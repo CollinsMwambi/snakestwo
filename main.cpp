@@ -30,13 +30,25 @@ void display_callback()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     drawGrid();
+    drawSnake();
+    drawFood();
     glutSwapBuffers();
-}
-//used to set viewport
-void reshape_callback(int w, int h){
-    glViewport(0,0,(GLsizei)w,(GLsizei)h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0, COLUMNS, 0.0, ROWS, -1.0, 1.0);
-    glMatrixMode(GL_MODELVIEW);
+    //displaying the score 
+    if (gameOver == true)
+    {
+
+        char _score[10];
+        itoa(score, _score, 10);
+        char text[50] = "Your score is: ";
+        strcat(text, _score);
+        MessageBox(NULL, text, "GAME OVER");
+        cout << text, "GAMEOVER";
+        exit(0);
+
+    }
+   
+   
+
+
+
 }
