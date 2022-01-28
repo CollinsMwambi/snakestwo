@@ -10,23 +10,20 @@ void reshape_callback(int, int );
 void init(){
     glClearColor(0.0, 0.0, 0.0, 1.0);
     initGrid(COLUMNS, ROWS);
-
 }
 
-int main( int argc, char  **argv) {
+int main(int argc, char **argv) {
     //initialise glut and display mode and window size
     glutInit(&argc,argv);
     //double buffer window
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-
     glutInitWindowSize(500, 500);
     glutCreateWindow("KENYAN SNAKE");
     glutDisplayFunc(display_callback);
     glutReshapeFunc(reshape_callback);
     init();
     glutMainLoop();
-
-    return 0;
+ return 0;
 }
 
 void display_callback()
