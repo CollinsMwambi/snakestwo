@@ -25,14 +25,12 @@
 #include <glad/glad.h>
 
 static void* get_proc(const char *namez);
-
 #if defined(_WIN32) || defined(__CYGWIN__)
 #ifndef _WINDOWS_
 #undef APIENTRY
 #endif
 #include <windows.h>
 static HMODULE libGL;
-
 typedef void* (APIENTRYP PFNWGLGETPROCADDRESSPROC_PRIVATE)(const char*);
 static PFNWGLGETPROCADDRESSPROC_PRIVATE gladGetProcAddressPtr;
 
@@ -45,14 +43,12 @@ static PFNWGLGETPROCADDRESSPROC_PRIVATE gladGetProcAddressPtr;
   #define HAVE_WINAPIFAMILY 1
 #endif
 #endif
-
 #ifdef HAVE_WINAPIFAMILY
   #include <winapifamily.h>
   #if !WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) && WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
     #define IS_UWP 1
   #endif
 #endif
-
 static
 int open_gl(void) {
 #ifndef IS_UWP
@@ -64,8 +60,7 @@ int open_gl(void) {
         return gladGetProcAddressPtr != NULL;
     }
 #endif
-
-    return 0;
+ return 0;
 }
 
 static
@@ -152,8 +147,7 @@ int gladLoadGL(void) {
         status = gladLoadGLLoader(&get_proc);
         close_gl();
     }
-
-    return status;
+ return status;
 }
 
 struct gladGLversionStruct GLVersion = { 0, 0 };
@@ -164,11 +158,9 @@ struct gladGLversionStruct GLVersion = { 0, 0 };
 
 static int max_loaded_major;
 static int max_loaded_minor;
-
 static const char *exts = NULL;
 static int num_exts_i = 0;
 static char **exts_i = NULL;
-
 static int get_exts(void) {
 #ifdef _GLAD_IS_SOME_NEW_VERSION
     if(max_loaded_major < 3) {
@@ -202,7 +194,6 @@ static int get_exts(void) {
 #endif
     return 1;
 }
-
 static void free_exts(void) {
     if (exts_i != NULL) {
         int index;
@@ -252,8 +243,7 @@ static int has_ext(const char *ext) {
         }
     }
 #endif
-
-    return 0;
+ return 0;
 }
 int GLAD_GL_VERSION_1_0 = 0;
 int GLAD_GL_VERSION_1_1 = 0;
